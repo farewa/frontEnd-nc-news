@@ -35,7 +35,6 @@ export const HeaderDiv = styled.div`
 export const StyledNav = styled.nav`
   width: 100vw;
   height: 8vh;
-  margin-bottom: 5%;
   display: flex;
   justify-content: space-between;
 `;
