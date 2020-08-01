@@ -59,3 +59,15 @@ export const UL = styled.ul`
     width: 300px;
   }
 `;
+
+export const CommentDiv = styled.div`
+  border-bottom: 1px solid white;
+`;
+
+export const CommentButton = styled.button`
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 90%;
+`;
