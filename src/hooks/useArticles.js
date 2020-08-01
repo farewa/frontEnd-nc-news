@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useCallback } from "react";
-import axios from "axios";
-import {reducer } from './reducer'
+import { reducer } from "./reducer";
+import { axiosInstance } from "../api";
 
 export const useArticles = (topic = "") => {
   const initialState = {
@@ -14,10 +14,9 @@ export const useArticles = (topic = "") => {
   const fetchArticles = useCallback(() => {
     const fetchingArticles = async () => {
       try {
-        const response = await axios.get(
-          "https://b-end-nc-news-app.herokuapp.com/api/articles",
-          { params: { topic } }
-        );
+        const response = await axiosInstance.get("/articles", {
+          params: { topic },
+        });
         dispatch({ type: "SUCCESS", data: response.data });
       } catch (error) {
         dispatch({ type: "ERROR", error });
