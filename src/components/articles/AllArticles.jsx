@@ -1,11 +1,10 @@
 import React from "react";
 import { ArticleList } from "./ArticleList";
 import { ArticleWrapper } from "../styled/lib";
-import { useArticles} from '../../hooks/useArticles'
+import { useArticles } from "../../hooks/useArticles";
 
 export const AllArticles = () => {
-
-  const { loading, data, error} = useArticles()
+  const { loading, data, error } = useArticles();
 
   return (
     <ArticleWrapper>
