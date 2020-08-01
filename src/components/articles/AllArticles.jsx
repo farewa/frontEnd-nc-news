@@ -7,14 +7,16 @@ export const AllArticles = () => {
   const { loading, data, error } = useArticles();
 
   return (
-    <ArticleWrapper>
-      <h1>Articles</h1>
-      {error && <p>error</p>}
-      {loading ? (
-        <p>loading...</p>
-      ) : (
-        <ul>{data.articles && <ArticleList articles={data.articles} />}</ul>
-      )}
-    </ArticleWrapper>
+    <main>
+      <ArticleWrapper>
+        <h1>Articles</h1>
+        {error && <p>error</p>}
+        {loading ? (
+          <p>loading...</p>
+        ) : (
+          <ul>{data.articles && <ArticleList articles={data.articles} />}</ul>
+        )}
+      </ArticleWrapper>
+    </main>
   );
 };
