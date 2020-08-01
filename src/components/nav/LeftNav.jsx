@@ -46,7 +46,7 @@ export const LeftNav = () => {
       {topics &&
         topics.map((topic) => {
           return (
-            <li>
+            <li key={topic.slug}>
               {" "}
               <Link to={`/${topic.slug}`}> {topic.slug} </Link>
             </li>
