@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { useSingleArticle } from "../../hooks/useSingleArticle";
-import { ArticleWrapper } from "../styled/lib";
+import { ArticleWrapper, CommentButton } from "../styled/lib";
 import { SingleArticleComments } from "../comments/SingleArticleComments";
 
 export const SingleArticle = ({ article_id }) => {
@@ -13,7 +13,7 @@ export const SingleArticle = ({ article_id }) => {
   console.log("in single article");
 
   return (
-    <>
+    <main>
       {error && <p>error</p>}
       {loading ? (
         <p>loading...</p>
@@ -25,17 +25,17 @@ export const SingleArticle = ({ article_id }) => {
             <h3>created {moment(data.article.created_at).fromNow()}</h3>
             <p>{data.article.body}</p>
             <p>Comment Count: {data.article.comment_count}</p>
-            <button
+            <CommentButton
               onClick={() => {
                 setComment(!showComment);
               }}
             >
-              comments
-            </button>
+              Comments
+            </CommentButton>
             {showComment && <SingleArticleComments article_id={article_id} />}
           </ArticleWrapper>
         )
       )}
-    </>
+    </main>
   );
 };
