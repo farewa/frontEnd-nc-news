@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "@reach/router";
 import { UL } from "../styled/lib";
-import axios from "axios";
+import * as api from "../../api";
 
 export const LeftNav = () => {
   const [topics, setTopics] = useState([]);
@@ -10,10 +10,8 @@ export const LeftNav = () => {
   const fetchTopics = useCallback(() => {
     const fetchingTopics = async () => {
       try {
-        const response = await axios.get(
-          "https://b-end-nc-news-app.herokuapp.com/api/topics"
-        );
-        setTopics(response.data.topics);
+        const topicsResponse = await api.getTopics();
+        setTopics(topicsResponse);
       } catch (error) {
         setError(error);
       }
