@@ -37,16 +37,19 @@ export const StyledNav = styled.nav`
   height: 8vh;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 `;
 
 export const UL = styled.ul`
   list-style: none;
   display: flex;
   text-decoration: none;
-  flex-flow: flow nowrap;
+  flex-flow: row nowrap;
+  padding: 0;
+  margin: 0;
 
   li {
-    padding: 18px 10px;
+    padding-left: 5%;
   }
 
   @media screen (max-width: 768px) {
@@ -70,4 +73,10 @@ export const CommentButton = styled.button`
   color: white;
   font-family: "Roboto", sans-serif;
   font-size: 90%;
+`;
+
+export const LogInDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
 `;
