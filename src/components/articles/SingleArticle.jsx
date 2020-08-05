@@ -10,8 +10,6 @@ export const SingleArticle = ({ article_id }) => {
 
   const [showComment, setComment] = useState(false);
 
-  console.log("in single article");
-
   return (
     <main>
       {error && <p>error</p>}
