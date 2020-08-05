@@ -1,4 +1,4 @@
-import React, { useState, createContext, useCallback, useMemo } from "react";
+import React, { useState, createContext, useMemo } from "react";
 import "./App.css";
 import { Router } from "@reach/router";
 import { Home } from "./components/home/Home";
@@ -12,24 +12,20 @@ export const UserContext = createContext();
 export const SetUserContext = createContext();
 
 const App = () => {
-  const [userName, setUsername] = useState("");
+  const [user, setUser] = useState("");
 
-  const settingUsername = useCallback(() => setUsername(userName), [userName]);
-
-  const getUsername = useMemo(() => ({settingUsername}), [settingUsername])
+  const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
     <AppWrapper>
-      <UserContext.Provider value={userName}>
-        <SetUserContext.Provider value={getUsername()}>
-          <Nav />
-          <Router>
-            <Home path="/" />
-            <AllArticles path="/articles" />
-            <ArticleByTopic path="/:topic" />
-            <SingleArticle path="/articles/:article_id" />
-          </Router>
-        </SetUserContext.Provider>
+      <UserContext.Provider value={userValue}>
+        <Nav />
+        <Router>
+          <Home path="/" />
+          <AllArticles path="/articles" />
+          <ArticleByTopic path="/:topic" />
+          <SingleArticle path="/articles/:article_id" />
+        </Router>
       </UserContext.Provider>
     </AppWrapper>
   );
