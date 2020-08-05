@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: 'https://b-end-nc-news-app.herokuapp.com/api',
 });
 
 export const getTopics = async () => {
@@ -11,6 +11,5 @@ export const getTopics = async () => {
 
 export const getUser = async (username) => {
   const singleUser = await axiosInstance.get(`/users/${username}`);
-
   return singleUser.data.user;
 };
