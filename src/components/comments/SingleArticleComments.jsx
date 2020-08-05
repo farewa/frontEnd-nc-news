@@ -8,8 +8,6 @@ export const SingleArticleComments = ({ article_id }) => {
 
   const { loading, data, error } = useSingleArticle(article_id, type);
 
-  console.log("in comments");
-
   return (
     <section>
       <article>
