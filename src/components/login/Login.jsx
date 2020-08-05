@@ -1,29 +1,24 @@
 import React, { useContext } from "react";
-import { UserContext, SetUserContext } from "../../App";
+import { UserContext } from "../../App";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Error } from "./LoginError";
 import * as api from "../../api";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(1, "Please enter a character")
-    .max(20, "please enter a shorter username")
-    .required("Must enter a username"),
+  username: Yup.string().required("choose a username"),
 });
 
 export const LogInBox = () => {
-  const username = useContext(UserContext);
-  console.log(username);
-  const settingUser = useContext(SetUserContext);
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <Formik
-      initialValues={{ username }}
+      initialValues={{ user }}
       validationSchema={validationSchema}
-      onSubmit={async (values, { setSubmitting, resetForm }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         setSubmitting(true);
         const usernameResponse = await api.getUser(values.username);
-        settingUser(usernameResponse.username);
+        setUser(usernameResponse.username);
       }}
     >
       {({
@@ -33,30 +28,47 @@ export const LogInBox = () => {
         handleChange,
         handleBlur,
         handleSubmit,
+        handleReset,
         isSubmitting,
       }) => (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username"> Username</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="username"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-              className={
-                touched.username && errors.username ? "has-error" : null
-              }
-            />
-            <Error touched={touched.username} message={errors.username} />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="username"> Username</label>
+              <select
+                name="username"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+              >
+                <option value="" label="select a username"></option>
+                <option value="tickle122" label="tickle122"></option>
+                <option value="grumpy19" label="grumpy19"></option>
+                <option value="happyamy2016" label="happyamy2016"></option>
+                <option value="cooljmessy" label="cooljmessy"></option>
+                <option value="weegembump" label="weegembump"></option>
+                <option value="jessjelly" label="jessjelly"></option>
+              </select>
+              {errors.username && touched.username && (
+                <div className="input-feedback">{errors.username}</div>
+              )}
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              login
           </button>
-        </form>
-      )}
+            {user && (
+              <div>
+                <p>logged in as {user}</p>
+                <button
+                  onClick={handleReset}
+                  disabled={isSubmitting}
+                  type={"reset"}
+                >
+                  reset
+              </button>
+              </div>
+            )}
+          </form>
+        )}
     </Formik>
   );
 };
