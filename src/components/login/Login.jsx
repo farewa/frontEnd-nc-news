@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../App";
 import { Formik } from "formik";
+import { StyledButton, MessageTag } from "../styled/lib";
 import * as Yup from "yup";
 import * as api from "../../api";
 
@@ -32,8 +33,7 @@ export const LogInBox = () => {
         isSubmitting,
       }) => (
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username"> Username</label>
+          <label htmlFor="username"> username</label>
             <select
               name="username"
               onChange={handleChange}
@@ -51,22 +51,21 @@ export const LogInBox = () => {
             {errors.username && touched.username && (
               <div className="input-feedback">{errors.username}</div>
             )}
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            login
-          </button>
-          {user && (
-            <div>
-              <p>logged in as {user}</p>
-              <button
-                onClick={() => setUser("")}
-                disabled={isSubmitting}
-                type={"reset"}
-              >
-                logout
-              </button>
-            </div>
-          )}
+            <StyledButton type="submit" disabled={isSubmitting}>
+              login
+            </StyledButton>
+            {user && (
+              <div>
+                <MessageTag>logged in as {user}</MessageTag>
+                <StyledButton
+                  onClick={() => setUser("")}
+                  disabled={isSubmitting}
+                  type={"reset"}
+                >
+                  logout
+                </StyledButton>
+              </div>
+            )}
         </form>
       )}
     </Formik>
