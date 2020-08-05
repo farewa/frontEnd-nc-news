@@ -67,7 +67,7 @@ export const CommentDiv = styled.div`
   border-bottom: 1px solid white;
 `;
 
-export const CommentButton = styled.button`
+export const StyledButton = styled.button`
   background-color: black;
   border: 1px solid white;
   color: white;
@@ -75,8 +75,13 @@ export const CommentButton = styled.button`
   font-size: 90%;
 `;
 
-export const LogInDiv = styled.div`
+export const FormDiv = styled.div`
+  position: relative;
+  font-family: "Roboto", sans-serif;
+`;
+
+export const MessageTag = styled.p`
   display: flex;
-  justify-content: space-between;
   flex-flow: row nowrap;
+  text-decoration: none;
 `;
