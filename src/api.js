@@ -13,3 +13,8 @@ export const getUser = async (username) => {
   const singleUser = await axiosInstance.get(`/users/${username}`);
   return singleUser.data.user;
 };
+
+export const getAllUsers = async () => {
+  const allUsers = await axiosInstance.get('/users')
+  return allUsers.data.users
+}
