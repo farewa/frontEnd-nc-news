@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 import { UserContext } from "../../App";
 import { Formik } from "formik";
 import { StyledButton, MessageTag } from "../styled/lib";
 import * as Yup from "yup";
 import * as api from "../../api";
+import {LogOut} from './Logout'
+
+
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("choose a username"),
@@ -12,7 +15,36 @@ const validationSchema = Yup.object().shape({
 export const LogInBox = () => {
   const { user, setUser } = useContext(UserContext);
 
+  const [users, setTopics] = useState([]);
+  const [error, setError] = useState({});
+
+  const fetchUsers = useCallback(() => {
+    const fetchingUsers = async () => {
+      try {
+        const usersResponse = await api.getAllUsers();
+        setTopics(usersResponse);
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchingUsers();
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      fetchUsers();
+    }
+
+    return () => {
+      mounted = false;
+    };
+  }, [fetchUsers]);
+
   return (
+    <div>
+    {user ? <LogOut /> : 
     <Formik
       initialValues={{ user }}
       validationSchema={validationSchema}
@@ -40,13 +72,10 @@ export const LogInBox = () => {
               onBlur={handleBlur}
               value={values.username}
             >
-              <option value="" label="select a username"></option>
-              <option value="tickle122" label="tickle122"></option>
-              <option value="grumpy19" label="grumpy19"></option>
-              <option value="happyamy2016" label="happyamy2016"></option>
-              <option value="cooljmessy" label="cooljmessy"></option>
-              <option value="weegembump" label="weegembump"></option>
-              <option value="jessjelly" label="jessjelly"></option>
+            <option value="" label="select a username"></option>
+            {users.map((user) => {
+              return <option value ={user.username} label={user.username}></option>
+            })}
             </select>
             {errors.username && touched.username && (
               <div className="input-feedback">{errors.username}</div>
@@ -69,5 +98,7 @@ export const LogInBox = () => {
         </form>
       )}
     </Formik>
+    }
+    </div>
   );
 };
