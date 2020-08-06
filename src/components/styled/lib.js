@@ -81,7 +81,7 @@ export const FormDiv = styled.div`
 `;
 
 export const MessageTag = styled.p`
-  display: flex;
+  display: inline;
   flex-flow: row nowrap;
   text-decoration: none;
-`;
+`
