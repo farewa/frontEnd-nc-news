@@ -2,7 +2,7 @@ import { useReducer, useEffect, useCallback } from "react";
 import { reducer } from "./reducer";
 import { axiosInstance } from "../api";
 
-export const useArticles = (topic = "") => {
+export const useArticles = (topic = "", page = 1) => {
   const initialState = {
     loading: true,
     data: "",
@@ -15,7 +15,7 @@ export const useArticles = (topic = "") => {
     const fetchingArticles = async () => {
       try {
         const response = await axiosInstance.get("/articles", {
-          params: { topic },
+          params: { topic, page },
         });
         dispatch({ type: "SUCCESS", data: response.data });
       } catch (error) {
@@ -23,7 +23,7 @@ export const useArticles = (topic = "") => {
       }
     };
     fetchingArticles();
-  }, [topic]);
+  }, [topic, page]);
 
   useEffect(() => {
     let mounted = true;
