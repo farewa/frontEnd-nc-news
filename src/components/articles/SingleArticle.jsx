@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import moment from "moment";
+import { UserContext } from "../../App";
 import { useSingleArticle } from "../../hooks/useSingleArticle";
 import { ArticleWrapper, StyledButton } from "../styled/lib";
 import { SingleArticleComments } from "../comments/SingleArticleComments";
@@ -21,6 +22,7 @@ export const SingleArticle = ({ article_id }) => {
             <h2>{data.article.title}</h2>
             <h3>author: {data.article.author}</h3>
             <h3>created {moment(data.article.created_at).fromNow()}</h3>
+            <h3>votes: {data.article.votes}</h3>
             <p>{data.article.body}</p>
             <p>Comment Count: {data.article.comment_count}</p>
             <StyledButton
