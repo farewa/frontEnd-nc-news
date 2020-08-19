@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import moment from "moment";
-import { UserContext } from "../../App";
 import { useSingleArticle } from "../../hooks/useSingleArticle";
 import { ArticleWrapper, StyledButton } from "../styled/lib";
 import { SingleArticleComments } from "../comments/SingleArticleComments";
