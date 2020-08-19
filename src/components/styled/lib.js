@@ -84,4 +84,18 @@ export const MessageTag = styled.p`
   display: inline;
   flex-flow: row nowrap;
   text-decoration: none;
-`
+`;
+export const PaginationButton = styled.button`
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+  font-family: "Roboto", sans - serif;
+  font-size: 90 %;
+  display: inline-block;
+`;
+
+export const PaginationUL = styled.ul`
+  list-style: none;
+  float: left;
+  vertical-align: middle;
+`;
